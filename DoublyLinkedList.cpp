@@ -6,27 +6,31 @@ class Node
 public:
     int data;
     Node *next;
+    Node *previous;
     Node(int data)
     {
         this->data = data;
         this->next = NULL;
+        this->previous = NULL;
     }
     ~Node()
     {
         if (this->next != NULL)
         {
-            next = NULL;
+            this->next = NULL;
+            this->previous = NULL;
             delete next;
+            delete previous;
         }
     }
 };
 
-class SLL
+class DLL
 {
 public:
     Node *head;
     Node *tail;
-    SLL()
+    DLL()
     {
         this->head = NULL;
         this->tail = NULL;
@@ -40,8 +44,8 @@ public:
         }
         else
         {
-            Node *temp = head;
             int count = 0;
+            Node *temp = head;
             while (temp != NULL)
             {
                 count++;
@@ -80,6 +84,7 @@ public:
         {
             Node *temp = new Node(data);
             temp->next = head;
+            head->previous = temp;
             head = temp;
         }
     }
@@ -87,28 +92,27 @@ public:
     {
         if (head == NULL)
         {
-            Node *NewNode = new Node(data);
-            head = NewNode;
-            tail = NewNode;
+            InsertAtHead(data);
         }
         else
         {
             Node *temp = new Node(data);
             tail->next = temp;
-            tail = tail->next;
+            temp->previous = tail;
+            tail = temp;
         }
     }
     void InsertAtPosition(int position, int data)
     {
-        if (position == 1 || position == 0)
+        if (position == 0 || position == 1)
         {
             InsertAtHead(data);
             return;
         }
         else if (position <= Length() + 1)
         {
-            Node *temp = head;
             int count = 1;
+            Node *temp = head;
             while (count < position - 1)
             {
                 temp = temp->next;
@@ -119,12 +123,11 @@ public:
                 InsertAtTail(data);
                 return;
             }
-            else
-            {
-                Node *NodeToInsert = new Node(data);
-                NodeToInsert->next = temp->next;
-                temp->next = NodeToInsert;
-            }
+            Node *NodeToInsert = new Node(data);
+            NodeToInsert->next = temp->next;
+            NodeToInsert->previous = temp;
+            temp->next->previous = NodeToInsert;
+            temp->next = NodeToInsert;
         }
         else
         {
@@ -138,10 +141,11 @@ public:
         {
             Node *temp = head;
             head = head->next;
+            head->previous = NULL;
             temp->next = NULL;
             delete temp;
         }
-        else if (position <= Length())
+        else if (position <= Length() + 1)
         {
             Node *current = head;
             Node *previous = NULL;
@@ -153,7 +157,9 @@ public:
                 count++;
             }
             previous->next = current->next;
+            current->next->previous = previous;
             current->next = NULL;
+            current->previous = NULL;
             delete current;
         }
         else
@@ -166,29 +172,17 @@ public:
 
 int main()
 {
-    SLL SLL1;
-    SLL1.InsertAtHead(50);
-    SLL1.Traverse();
-    SLL1.InsertAtHead(40);
-    SLL1.Traverse();
-    SLL1.InsertAtHead(30);
-    SLL1.Traverse();
-    SLL1.InsertAtHead(20);
-    SLL1.Traverse();
-    SLL1.InsertAtHead(10);
-    SLL1.Traverse();
-    SLL1.InsertAtTail(60);
-    SLL1.Traverse();
-    SLL1.InsertAtTail(80);
-    SLL1.Traverse();
-    SLL1.InsertAtTail(90);
-    SLL1.Traverse();
-    SLL1.InsertAtTail(100);
-    SLL1.Traverse();
-    SLL1.InsertAtPosition(7, 70);
-    SLL1.Traverse();
-    SLL1.InsertAtPosition(11, 110);
-    SLL1.Traverse();
-    SLL1.DeleteAtPosition(11);
-    SLL1.Traverse();
+    DLL DLL1;
+    DLL1.InsertAtHead(50);
+    DLL1.InsertAtHead(40);
+    DLL1.InsertAtHead(30);
+    DLL1.InsertAtHead(20);
+    DLL1.InsertAtHead(10);
+    DLL1.InsertAtTail(60);
+    DLL1.InsertAtTail(80);
+    DLL1.InsertAtTail(90);
+    DLL1.InsertAtPosition(7, 70);
+    DLL1.Traverse();
+    DLL1.DeleteAtPosition(5);
+    DLL1.Traverse();
 }
