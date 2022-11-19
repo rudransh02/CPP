@@ -189,6 +189,4 @@ int main()
     SLL1.Traverse();
     SLL1.InsertAtPosition(11, 110);
     SLL1.Traverse();
-    SLL1.DeleteAtPosition(11);
-    SLL1.Traverse();
 }
