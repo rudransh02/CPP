@@ -6,7 +6,7 @@ int BinarySearch(int array[], int size, int value)
     int index = 0;
     int start = 0;
     int end = size - 1;
-//Because Range Of 'int' is (2^31) - 1 And If Values Like 2^31 and 2^30 Are Summed Up To Get Divided By 2 Then The Code Will Break In The 'mid' Variable!
+//Because Range Of 'int' is (2^31) - 1 And If Values Like 2^31 and 2^30 Are Summed Up To Get Divided By 2 Then The Code Will Break In The 'mid' Variable
     int mid = start + ((end - start) / 2);
     while (start <= end)
     {
