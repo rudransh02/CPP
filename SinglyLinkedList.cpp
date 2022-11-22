@@ -162,6 +162,21 @@ public:
             return;
         }
     }
+    void Reverse()
+    {
+        Node *previous = NULL;
+        Node *current = head;
+        Node *forward;
+        while (current != NULL)
+        {
+            forward = current->next;
+            current->next = previous;
+            previous = current;
+            current = forward;
+        }
+        tail = head;
+        head = previous;
+    }
 };
 
 int main()
@@ -188,5 +203,6 @@ int main()
     SLL1.InsertAtPosition(7, 70);
     SLL1.Traverse();
     SLL1.InsertAtPosition(11, 110);
+    SLL1.Reverse();
     SLL1.Traverse();
 }
