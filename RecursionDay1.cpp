@@ -42,7 +42,7 @@ void Counting(int n)
     // cout << n << " ";
     // Tail Recursive Call In Which The Function First Executes The Processing Block And Then Makes The Recursive Call
     // return Counting(n - 1);
-    Counting(n - 1);/
+    Counting(n - 1);
     // Head Recursive Call In Which The Function First Makes The Recursive Call And Then Executes The Processing Block
     cout << n << " ";
 }
