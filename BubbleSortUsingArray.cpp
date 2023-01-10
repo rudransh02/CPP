@@ -5,13 +5,13 @@ using namespace std;
 
 void BubbleSort(int array[], int size)
 {
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size - 1; i++)
     {
-        for (int j = i + 1; j < size; j++)
+        for (int j = 0; j < size - i - 1; j++)
         {
-            if (array[i] > array[j])
+            if (array[j] > array[j + 1])
             {
-                swap(array[i], array[j]);
+                swap(array[j], array[j + 1]);
             }
         }
     }
