@@ -168,6 +168,28 @@ public:
             return;
         }
     }
+    void Reverse()
+    {
+        if (head == NULL)
+        {
+            return;
+        }
+        else
+        {
+            Node *current = head;
+            Node *prev = NULL;
+            Node *forward;
+            while (current != NULL)
+            {
+                forward = current->next;
+                current->next = prev;
+                prev = current;
+                current = forward;
+            }
+            tail = head;
+            head = prev;
+        }
+    }
 };
 
 int main()
