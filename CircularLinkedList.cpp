@@ -106,7 +106,7 @@ public:
             prev->next = curr->next;
             if (curr == prev)
             {
-                currentz = NULL;
+                current = NULL;
             }
             else if (current == curr)
             {
