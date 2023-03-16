@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Node
@@ -109,6 +110,28 @@ class Stack
     }
 };
 
+Stack RemoveMiddleElements(Stack S1)
+{
+    Node *temp = S1.top;
+    int size = S1.Length() / 2;
+    int i = 0;
+    vector<int> v;
+    while (i < size)
+    {
+        v.push_back(S1.Peek());
+        S1.Pop();
+        i++;
+    }
+    S1.Pop();
+    int s = v.size();
+    for (int i = s - 1; i >= 0; i--)
+    {
+        S1.Push(v[i]);
+        v.pop_back();
+    }
+    return S1;
+}
+
 int main()
 {
     Stack S1;
@@ -117,5 +140,7 @@ int main()
     S1.Push(30);
     S1.Push(20);
     S1.Push(10);
+    S1 = RemoveMiddleElements(S1);
+    S1.Traverse();
     cout << S1.Length();
 }
